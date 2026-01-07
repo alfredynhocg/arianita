@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "build:prod": "ng build --configuration production",
-    "deploy:gh": "ng build --configuration production --base-href /invitacion-bautizo/ && npx angular-cli-ghpages --dir=dist/invitacion-bautizo",
+    "deploy:gh": "ng build --configuration production --base-href /arianita/ && npx angular-cli-ghpages --dir=dist/invitacion-bautizo",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
