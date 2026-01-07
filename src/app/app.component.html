@@ -1,0 +1,168 @@
+<div class="invitation-container">
+  <!-- Header con animación -->
+  <div class="header">
+    <div class="decorative-element top"></div>
+    <h1 class="animate-fade-in">Invitación de Bautizo</h1>
+    <div class="hearts">💖✨💫</div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="main-content">
+    <div class="intro-text animate-slide-up">
+      <p class="dear">Querido/a amigo/a:</p>
+      <p class="invitation-text">
+        Con mucho cariño te invitamos al bautizo de
+      </p>
+    </div>
+
+    <!-- Nombre de la niña destacado -->
+    <div class="name-highlight animate-zoom-in">
+      <div class="name-decoration">✨</div>
+      <h2 class="child-name">{{ nombreNina }}</h2>
+      <div class="name-decoration">✨</div>
+    </div>
+
+    <!-- Fecha del evento -->
+    <div class="event-date animate-slide-up">
+      <p class="date-text">Que se celebrará este</p>
+      <p class="date-highlight">{{ fechaBautizo }}</p>
+    </div>
+
+    <!-- Detalles adicionales -->
+    <div class="details-section animate-fade-in">
+      <div class="detail-card">
+        <div class="icon">⛪</div>
+        <h3>Ceremonia Religiosa</h3>
+        <p>Hora: 10:00 AM</p>
+        <p>Iglesia San Francisco</p>
+      </div>
+
+      <div class="detail-card">
+        <div class="icon">🎉</div>
+        <h3>Celebración</h3>
+        <p>Hora: 12:00 PM</p>
+        <p>Salón de Eventos</p>
+      </div>
+    </div>
+
+    <!-- Mensaje de la madre -->
+    <div class="mother-section animate-slide-up">
+      <p class="with-love">Con mucho cariño,</p>
+      <p class="mother-name">{{ nombreMadre }}</p>
+    </div>
+
+    <!-- Botón de confirmación -->
+    <div class="confirmation-section">
+      <button class="confirm-btn" (click)="toggleFormulario()" *ngIf="!confirmado && !cargando">
+        👉 Confirmar Asistencia
+      </button>
+
+      <!-- Spinner de carga -->
+      <div class="loading-spinner" *ngIf="cargando">
+        <div class="spinner"></div>
+        <p>Procesando...</p>
+      </div>
+
+      <!-- Formulario de confirmación -->
+      <div class="form-container" *ngIf="mostrarFormulario && !confirmado && !cargando">
+        <input 
+          type="text" 
+          [(ngModel)]="nombreInvitado" 
+          placeholder="Tu nombre completo"
+          class="input-field"
+          (keyup.enter)="confirmarAsistencia()"
+        />
+        <button class="submit-btn" (click)="confirmarAsistencia()">
+          Confirmar 💖
+        </button>
+        <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+      </div>
+
+      <!-- Mensaje de confirmación -->
+      <div class="confirmed-message" *ngIf="confirmado">
+        <p>✅ ¡Confirmación recibida!</p>
+        <p>¡Te esperamos! 💖</p>
+        <p class="total-confirmados">Total confirmados: {{ totalInvitados }}</p>
+      </div>
+    </div>
+
+    <!-- Sección de administración (para ver la lista) -->
+    <div class="admin-section">
+      <button class="admin-toggle-btn" (click)="toggleListaInvitados()">
+        {{ autenticado ? '🔒 Panel Admin' : '👀 Ver Lista' }} 
+        <span *ngIf="totalInvitados > 0">({{ totalInvitados }})</span>
+      </button>
+
+      <!-- Login Admin -->
+      <div class="admin-login" *ngIf="mostrarLoginAdmin && !autenticado && !cargando">
+        <h3>🔐 Acceso Administrador</h3>
+        <input 
+          type="password" 
+          [(ngModel)]="passwordAdmin" 
+          placeholder="Contraseña de administrador"
+          class="input-field"
+          (keyup.enter)="loginAdmin()"
+        />
+        <button class="submit-btn" (click)="loginAdmin()">
+          Entrar
+        </button>
+        <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+      </div>
+
+      <!-- Lista de invitados -->
+      <div class="guests-list" *ngIf="mostrarListaInvitados && autenticado">
+        <div class="admin-header">
+          <h3>📋 Invitados Confirmados</h3>
+          <button class="logout-btn" (click)="cerrarSesionAdmin()">
+            🚪 Cerrar Sesión
+          </button>
+        </div>
+        
+        <div class="action-buttons">
+          <button class="refresh-btn" (click)="recargarLista()" [disabled]="cargando">
+            🔄 Actualizar
+          </button>
+          <button class="download-btn" (click)="descargarLista()">
+            📥 Descargar Lista
+          </button>
+          <button class="clear-btn" (click)="limpiarTodo()">
+            🗑️ Limpiar Todo
+          </button>
+        </div>
+        
+        <div class="guest-list-container">
+          <div class="guest-item" *ngFor="let invitado of invitadosConfirmados; let i = index">
+            <div class="guest-info">
+              <span class="guest-number">{{ i + 1 }}.</span>
+              <span class="guest-name">{{ invitado.nombre }}</span>
+              <span class="guest-date">{{ invitado.fechaLegible }}</span>
+            </div>
+            <button class="delete-btn" (click)="eliminarInvitado(invitado.id)">
+              ❌
+            </button>
+          </div>
+          
+          <div class="empty-message" *ngIf="invitadosConfirmados.length === 0">
+            <p>No hay invitados confirmados aún</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer decorativo -->
+  <div class="footer">
+    <div class="decorative-element bottom"></div>
+    <div class="hearts-bottom">🌸 💕 🌸</div>
+  </div>
+
+  <!-- Elementos de fondo animados -->
+  <div class="background-hearts">
+    <span class="floating-heart" style="left: 10%; animation-delay: 0s;">💖</span>
+    <span class="floating-heart" style="left: 20%; animation-delay: 2s;">✨</span>
+    <span class="floating-heart" style="left: 30%; animation-delay: 4s;">💫</span>
+    <span class="floating-heart" style="left: 70%; animation-delay: 1s;">💖</span>
+    <span class="floating-heart" style="left: 80%; animation-delay: 3s;">✨</span>
+    <span class="floating-heart" style="left: 90%; animation-delay: 5s;">💫</span>
+  </div>
+</div>
