@@ -22,8 +22,8 @@ export interface ApiResponse {
   providedIn: 'root'
 })
 export class InvitadosService {
-  // Cambia esta URL cuando despliegues el backend
-  private apiUrl = 'http://localhost:3000/api';
+  // URL del backend en Railway - actualiza esto con tu dominio real
+  private apiUrl = 'https://arianita-production.up.railway.app/api';
 
   constructor(private http: HttpClient) { }
 
