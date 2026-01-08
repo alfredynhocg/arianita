@@ -18,7 +18,16 @@ export class AppComponent {
   // Datos del evento
   nombreNina = 'Arianita';
   nombreMadre = 'María Elena Choque Núñez';
-  fechaBautizo = '27 de septiembre de 2025';
+  fechaBautizo = '24 de enero de 2026';
+  
+  // Slider de imágenes
+  imagenes = [
+    'assets/imagenes/1.jpeg',
+    'assets/imagenes/2.jpeg',
+    'assets/imagenes/3.jpeg'
+  ];
+  indiceActual = 0;
+  intervaloSlider: any;
   
   // Datos del formulario de confirmación
   nombreInvitado = '';
@@ -39,6 +48,7 @@ export class AppComponent {
 
   constructor(private invitadosService: InvitadosService) {
     this.cargarContador();
+    this.iniciarSlider();
   }
 
   cargarContador() {
@@ -203,6 +213,34 @@ export class AppComponent {
           console.error('Error:', error);
         }
       });
+    }
+  }
+
+  // Métodos del slider
+  iniciarSlider() {
+    this.intervaloSlider = setInterval(() => {
+      this.siguiente();
+    }, 4000); // Cambia cada 4 segundos
+  }
+
+  siguiente() {
+    this.indiceActual = (this.indiceActual + 1) % this.imagenes.length;
+  }
+
+  anterior() {
+    this.indiceActual = (this.indiceActual - 1 + this.imagenes.length) % this.imagenes.length;
+  }
+
+  irASlide(indice: number) {
+    this.indiceActual = indice;
+    // Reiniciar el intervalo para que no cambie inmediatamente después de hacer clic
+    clearInterval(this.intervaloSlider);
+    this.iniciarSlider();
+  }
+
+  ngOnDestroy() {
+    if (this.intervaloSlider) {
+      clearInterval(this.intervaloSlider);
     }
   }
 }

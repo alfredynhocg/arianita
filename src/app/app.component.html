@@ -1,12 +1,15 @@
 <div class="invitation-container">
-  <!-- Header con animación -->
   <div class="header">
     <div class="decorative-element top"></div>
+    <div class="capybara-decorations">
+      <img src="assets/capibaras/capybara-flower.png" alt="Capibara" class="capybara-left" *ngIf="false">
+      <img src="assets/capibaras/capybara-crown.png" alt="Capibara" class="capybara-right" *ngIf="false">
+    </div>
+    <div class="capybara-header">🦦🌿</div>
     <h1 class="animate-fade-in">Invitación de Bautizo</h1>
-    <div class="hearts">💖✨💫</div>
+    <div class="hearts">🦦💖🌿</div>
   </div>
 
-  <!-- Contenido principal -->
   <div class="main-content">
     <div class="intro-text animate-slide-up">
       <p class="dear">Querido/a amigo/a:</p>
@@ -15,55 +18,89 @@
       </p>
     </div>
 
-    <!-- Nombre de la niña destacado -->
     <div class="name-highlight animate-zoom-in">
-      <div class="name-decoration">✨</div>
+      <div class="name-decoration">🦦</div>
       <h2 class="child-name">{{ nombreNina }}</h2>
-      <div class="name-decoration">✨</div>
+      <div class="name-decoration">🦦</div>
+    </div>
+    <div class="capybara-message">
+      <div class="cute-capybara capybara-rainbow">🌈</div>
+      <p>🌿 ¡Un día especial para celebrar su bautizo! 🌿</p>
+      <div class="cute-capybara capybara-gift">🎁</div>
     </div>
 
-    <!-- Fecha del evento -->
+    <div class="slider-container animate-fade-in">
+      <div class="slider-wrapper">
+        <div class="slider-images" [style.transform]="'translateX(-' + (indiceActual * 100) + '%)'">
+          <div class="slide" *ngFor="let imagen of imagenes; let i = index" 
+               [class.active]="i === indiceActual"
+               [class.prev]="i === indiceActual - 1"
+               [class.next]="i === indiceActual + 1">
+            <img [src]="imagen" [alt]="'Foto ' + (i + 1)">
+          </div>
+        </div>
+        
+        <button class="slider-btn prev" (click)="anterior()" aria-label="Anterior">
+          ❮
+        </button>
+        <button class="slider-btn next" (click)="siguiente()" aria-label="Siguiente">
+          ❯
+        </button>
+      </div>
+      
+      <div class="slider-dots">
+        <span 
+          *ngFor="let imagen of imagenes; let i = index" 
+          class="dot" 
+          [class.active]="i === indiceActual"
+          (click)="irASlide(i)"
+        ></span>
+      </div>
+    </div>
+
     <div class="event-date animate-slide-up">
       <p class="date-text">Que se celebrará este</p>
       <p class="date-highlight">{{ fechaBautizo }}</p>
     </div>
 
-    <!-- Detalles adicionales -->
     <div class="details-section animate-fade-in">
       <div class="detail-card">
+        <div class="capybara-card-icon">🦦🎀</div>
         <div class="icon">⛪</div>
         <h3>Ceremonia Religiosa</h3>
-        <p>Hora: 10:00 AM</p>
-        <p>Iglesia San Francisco</p>
+        <p>🦦 Hora: 10:00 AM</p>
+        <p>Iglesia de Ayo Ayo</p>
       </div>
 
       <div class="detail-card">
+        <div class="capybara-card-icon">🦦👑</div>
         <div class="icon">🎉</div>
         <h3>Celebración</h3>
-        <p>Hora: 12:00 PM</p>
-        <p>Salón de Eventos</p>
+        <p>🦦 Hora: 12:00 PM</p>
+        <p>🌿 Salón de Eventos</p>
+        <div class="capybara-party">🦦🧁 🦦🍰</div>
       </div>
     </div>
 
-    <!-- Mensaje de la madre -->
     <div class="mother-section animate-slide-up">
       <p class="with-love">Con mucho cariño,</p>
       <p class="mother-name">{{ nombreMadre }}</p>
     </div>
 
-    <!-- Botón de confirmación -->
     <div class="confirmation-section">
-      <button class="confirm-btn" (click)="toggleFormulario()" *ngIf="!confirmado && !cargando">
-        👉 Confirmar Asistencia
-      </button>
+      <div class="capybara-invite">
+        <div class="capybara-friend capybara-friend-1">🦦💌</div>
+        <button class="confirm-btn" (click)="toggleFormulario()" *ngIf="!confirmado && !cargando">
+          🦦 Confirmar Asistencia 🌿
+        </button>
+        <div class="capybara-friend capybara-friend-2">🦦🎈</div>
+      </div>
 
-      <!-- Spinner de carga -->
       <div class="loading-spinner" *ngIf="cargando">
         <div class="spinner"></div>
         <p>Procesando...</p>
       </div>
 
-      <!-- Formulario de confirmación -->
       <div class="form-container" *ngIf="mostrarFormulario && !confirmado && !cargando">
         <input 
           type="text" 
@@ -78,7 +115,6 @@
         <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
       </div>
 
-      <!-- Mensaje de confirmación -->
       <div class="confirmed-message" *ngIf="confirmado">
         <p>✅ ¡Confirmación recibida!</p>
         <p>¡Te esperamos! 💖</p>
@@ -86,14 +122,12 @@
       </div>
     </div>
 
-    <!-- Sección de administración (para ver la lista) -->
     <div class="admin-section">
       <button class="admin-toggle-btn" (click)="toggleListaInvitados()">
         {{ autenticado ? '🔒 Panel Admin' : '👀 Ver Lista' }} 
         <span *ngIf="totalInvitados > 0">({{ totalInvitados }})</span>
       </button>
 
-      <!-- Login Admin -->
       <div class="admin-login" *ngIf="mostrarLoginAdmin && !autenticado && !cargando">
         <h3>🔐 Acceso Administrador</h3>
         <input 
@@ -109,7 +143,6 @@
         <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
       </div>
 
-      <!-- Lista de invitados -->
       <div class="guests-list" *ngIf="mostrarListaInvitados && autenticado">
         <div class="admin-header">
           <h3>📋 Invitados Confirmados</h3>
@@ -150,19 +183,19 @@
     </div>
   </div>
 
-  <!-- Footer decorativo -->
   <div class="footer">
     <div class="decorative-element bottom"></div>
-    <div class="hearts-bottom">🌸 💕 🌸</div>
+    <div class="hearts-bottom">🦦 🌿 💕 🌿 🦦</div>
   </div>
 
-  <!-- Elementos de fondo animados -->
   <div class="background-hearts">
-    <span class="floating-heart" style="left: 10%; animation-delay: 0s;">💖</span>
-    <span class="floating-heart" style="left: 20%; animation-delay: 2s;">✨</span>
-    <span class="floating-heart" style="left: 30%; animation-delay: 4s;">💫</span>
-    <span class="floating-heart" style="left: 70%; animation-delay: 1s;">💖</span>
-    <span class="floating-heart" style="left: 80%; animation-delay: 3s;">✨</span>
-    <span class="floating-heart" style="left: 90%; animation-delay: 5s;">💫</span>
+    <span class="floating-heart" style="left: 10%; animation-delay: 0s;">🦦</span>
+    <span class="floating-heart" style="left: 20%; animation-delay: 2s;">🌿</span>
+    <span class="floating-heart" style="left: 30%; animation-delay: 4s;">💖</span>
+    <span class="floating-heart" style="left: 40%; animation-delay: 6s;">🦦</span>
+    <span class="floating-heart" style="left: 60%; animation-delay: 1s;">🌿</span>
+    <span class="floating-heart" style="left: 70%; animation-delay: 3s;">💖</span>
+    <span class="floating-heart" style="left: 80%; animation-delay: 5s;">🦦</span>
+    <span class="floating-heart" style="left: 90%; animation-delay: 7s;">🌿</span>
   </div>
 </div>
