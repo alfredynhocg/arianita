@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { InvitadosService, Invitado } from './invitados.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
@@ -10,17 +11,23 @@ import { InvitadosService, Invitado } from './invitados.service';
   imports: [CommonModule, FormsModule, HttpClientModule],
   providers: [InvitadosService],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations: [
+    trigger('slideIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(50px)' }),
+        animate('800ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ])
+  ]
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   title = 'Invitación Bautizo - Arianita';
   
-  // Datos del evento
   nombreNina = 'Arianita';
   nombreMadre = 'María Elena Choque Núñez';
   fechaBautizo = '24 de enero de 2026';
   
-  // Slider de imágenes
   imagenes = [
     'assets/imagenes/1.jpeg',
     'assets/imagenes/2.jpeg',
@@ -29,26 +36,33 @@ export class AppComponent {
   indiceActual = 0;
   intervaloSlider: any;
   
-  // Datos del formulario de confirmación
   nombreInvitado = '';
   confirmado = false;
   mostrarFormulario = false;
   cargando = false;
   
-  // Lista de invitados confirmados
   invitadosConfirmados: Invitado[] = [];
   mostrarListaInvitados = false;
   totalInvitados = 0;
   
-  // Administración
   passwordAdmin = '';
   autenticado = false;
   mostrarLoginAdmin = false;
   errorMessage = '';
+  
+  @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
+  musicPlaying = true;
+  
+  sobreAbierto = false;
 
   constructor(private invitadosService: InvitadosService) {
     this.cargarContador();
     this.iniciarSlider();
+  }
+  
+  abrirSobre() {
+    this.sobreAbierto = true;
+    this.intentarReproducirMusica();
   }
 
   cargarContador() {
@@ -216,7 +230,6 @@ export class AppComponent {
     }
   }
 
-  // Métodos del slider
   iniciarSlider() {
     this.intervaloSlider = setInterval(() => {
       this.siguiente();
@@ -233,7 +246,6 @@ export class AppComponent {
 
   irASlide(indice: number) {
     this.indiceActual = indice;
-    // Reiniciar el intervalo para que no cambie inmediatamente después de hacer clic
     clearInterval(this.intervaloSlider);
     this.iniciarSlider();
   }
@@ -241,6 +253,42 @@ export class AppComponent {
   ngOnDestroy() {
     if (this.intervaloSlider) {
       clearInterval(this.intervaloSlider);
+    }
+  }
+
+  ngAfterViewInit() {
+    this.intentarReproducirMusica();
+  }
+
+  intentarReproducirMusica() {
+    setTimeout(() => {
+      if (this.audioPlayer) {
+        const audio = this.audioPlayer.nativeElement;
+        audio.volume = 0.7; // Volumen al 70%
+        audio.play().then(() => {
+          this.musicPlaying = true;
+          console.log('Música reproduciéndose');
+        }).catch(error => {
+          console.log('Autoplay bloqueado, espera interacción del usuario');
+          this.musicPlaying = false;
+        });
+      }
+    }, 300);
+  }
+
+  toggleMusic() {
+    if (!this.audioPlayer) return;
+    
+    const audio = this.audioPlayer.nativeElement;
+    
+    if (this.musicPlaying) {
+      audio.pause();
+      this.musicPlaying = false;
+    } else {
+      audio.play().catch(error => {
+        console.error('Error al reproducir música:', error);
+      });
+      this.musicPlaying = true;
     }
   }
 }
