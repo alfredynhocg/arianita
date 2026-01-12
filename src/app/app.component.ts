@@ -84,6 +84,31 @@ export class AppComponent implements AfterViewInit {
     if (window.matchMedia('(display-mode: standalone)').matches) {
       this.mostrarBotonInstalar = false;
     }
+    
+    // Manejar visibilidad de la página para pausar/reanudar música
+    this.setupVisibilityListener();
+  }
+  
+  setupVisibilityListener() {
+    document.addEventListener('visibilitychange', () => {
+      if (!this.audioPlayer) return;
+      
+      const audio = this.audioPlayer.nativeElement;
+      
+      if (document.hidden) {
+        // La página está oculta (usuario cambió de pestaña o minimizó la app)
+        if (this.musicPlaying) {
+          audio.pause();
+        }
+      } else {
+        // La página es visible nuevamente
+        if (this.musicPlaying) {
+          audio.play().catch(error => {
+            console.log('No se pudo reanudar la música:', error);
+          });
+        }
+      }
+    });
   }
   
   abrirSobre() {
