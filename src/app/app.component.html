@@ -6,6 +6,10 @@
   <button class="music-control" (click)="toggleMusic(); $event.stopPropagation()" [title]="musicPlaying ? 'Pausar música' : 'Reproducir música'">
     {{ musicPlaying ? '🔊' : '🔇' }}
   </button>
+  
+  <button class="install-btn" *ngIf="mostrarBotonInstalar" (click)="instalarApp(); $event.stopPropagation()" title="Instalar en tu dispositivo">
+    📱 Instalar App
+  </button>
 
   <div class="envelope-container" *ngIf="!sobreAbierto">
     <div class="flores-fondo">

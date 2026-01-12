@@ -55,6 +55,10 @@ export class AppComponent implements AfterViewInit {
   musicPlaying = true;
   
   sobreAbierto = false;
+  
+  // PWA Install
+  deferredPrompt: any;
+  mostrarBotonInstalar = false;
 
   constructor(private invitadosService: InvitadosService) {
     this.cargarContador();
@@ -68,6 +72,18 @@ export class AppComponent implements AfterViewInit {
       offset: 100,
       easing: 'ease-in-out'
     });
+    
+    // Capturar el evento de instalación PWA
+    window.addEventListener('beforeinstallprompt', (e: any) => {
+      e.preventDefault();
+      this.deferredPrompt = e;
+      this.mostrarBotonInstalar = true;
+    });
+    
+    // Verificar si ya está instalada
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      this.mostrarBotonInstalar = false;
+    }
   }
   
   abrirSobre() {
@@ -77,6 +93,19 @@ export class AppComponent implements AfterViewInit {
     setTimeout(() => {
       AOS.refresh();
     }, 100);
+  }
+  
+  instalarApp() {
+    if (this.deferredPrompt) {
+      this.deferredPrompt.prompt();
+      this.deferredPrompt.userChoice.then((choiceResult: any) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('Usuario aceptó instalar la app');
+        }
+        this.deferredPrompt = null;
+        this.mostrarBotonInstalar = false;
+      });
+    }
   }
 
   cargarContador() {

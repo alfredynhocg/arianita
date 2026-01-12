@@ -41,6 +41,56 @@ body {
   transform: scale(0.95);
 }
 
+/* Botón de instalación PWA */
+.install-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 12px 24px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  border: 3px solid #fff;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: bounce-install 2s infinite;
+}
+
+.install-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.6);
+}
+
+.install-btn:active {
+  transform: scale(0.95);
+}
+
+@keyframes bounce-install {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@media (max-width: 768px) {
+  .install-btn {
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}
+
 @keyframes pulse-music {
   0%, 100% {
     box-shadow: 0 4px 15px rgba(212, 80, 143, 0.4);
