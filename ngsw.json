@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1768219216712,
+  "timestamp": 1768219685151,
   "index": "/arianita/index.html",
   "assetGroups": [
     {
@@ -12,7 +12,7 @@
       },
       "urls": [
         "/arianita/index.html",
-        "/arianita/main.1ffc3e6c27ba082d.js",
+        "/arianita/main.b1d119c0d74f2ea1.js",
         "/arianita/manifest.webmanifest",
         "/arianita/polyfills.f4207b8bd295aad9.js",
         "/arianita/runtime.f1a2ad045e5e17bf.js",
@@ -60,8 +60,8 @@
     "/arianita/assets/imagenes/1.jpeg": "b749dc00d0f56b97babc4bf0776d12ed62ef7c1e",
     "/arianita/assets/imagenes/2.jpeg": "7c5bb3c8a9dc159bd06e0e98a08ca94d71ad53af",
     "/arianita/assets/imagenes/3.jpeg": "6ffa36838be60d3cc73aebeb1d9976aba6015e8e",
-    "/arianita/index.html": "bfadf73e59cb99fe6f12ca9d170db783866f5f36",
-    "/arianita/main.1ffc3e6c27ba082d.js": "0f8d102989a96985e88e43fb445e35b1a34fadc6",
+    "/arianita/index.html": "af1e945f25d1c9c3dbaa505d4af219a69319ca2f",
+    "/arianita/main.b1d119c0d74f2ea1.js": "65bf301024bfd7195a97f05f78658f6b5470afdb",
     "/arianita/manifest.webmanifest": "936232d0126afd75019f7d1a66649b93b1a129c6",
     "/arianita/polyfills.f4207b8bd295aad9.js": "73360f579dc74920a3b9b007b573f7ecb9874685",
     "/arianita/runtime.f1a2ad045e5e17bf.js": "09801781405a4137e6a8afec39e74ee40952d08b",
