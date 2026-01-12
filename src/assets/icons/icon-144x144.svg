@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="144" height="144" viewBox="0 0 144 144" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFE4F0;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFC0CB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFB6D4;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Fondo -->
+  <rect width="144" height="144" fill="url(#bgGradient)" rx="14.4"/>
+  
+  <!-- Flor central grande -->
+  <g transform="translate(72, 72)" filter="url(#shadow)">
+    <!-- Pétalos -->
+    
+      <ellipse cx="0" cy="-21.599999999999998" rx="14.4" ry="28.8" 
+               fill="#FF69B4" transform="rotate(0)"/>
+    
+      <ellipse cx="0" cy="-21.599999999999998" rx="14.4" ry="28.8" 
+               fill="#FF69B4" transform="rotate(72)"/>
+    
+      <ellipse cx="0" cy="-21.599999999999998" rx="14.4" ry="28.8" 
+               fill="#FF69B4" transform="rotate(144)"/>
+    
+      <ellipse cx="0" cy="-21.599999999999998" rx="14.4" ry="28.8" 
+               fill="#FF69B4" transform="rotate(216)"/>
+    
+      <ellipse cx="0" cy="-21.599999999999998" rx="14.4" ry="28.8" 
+               fill="#FF69B4" transform="rotate(288)"/>
+    
+    <!-- Centro -->
+    <circle cx="0" cy="0" r="10.799999999999999" fill="#FFE066"/>
+    <circle cx="0" cy="0" r="7.2" fill="#FFA500" opacity="0.6"/>
+  </g>
+  
+  <!-- Flores pequeñas decorativas -->
+  
+    <g transform="translate(36, 43.199999999999996)" filter="url(#shadow)">
+      
+        <ellipse cx="0" cy="-11.52" rx="6.912" ry="13.824" 
+                 fill="#FFB6D4" transform="rotate(0)"/>
+      
+        <ellipse cx="0" cy="-11.52" rx="6.912" ry="13.824" 
+                 fill="#FFB6D4" transform="rotate(90)"/>
+      
+        <ellipse cx="0" cy="-11.52" rx="6.912" ry="13.824" 
+                 fill="#FFB6D4" transform="rotate(180)"/>
+      
+        <ellipse cx="0" cy="-11.52" rx="6.912" ry="13.824" 
+                 fill="#FFB6D4" transform="rotate(270)"/>
+      
+      <circle cx="0" cy="0" r="5.183999999999999" fill="#FFE066"/>
+    </g>
+  
+    <g transform="translate(108, 43.199999999999996)" filter="url(#shadow)">
+      
+        <ellipse cx="0" cy="-11.52" rx="6.912" ry="13.824" 
+                 fill="#FFB6D4" transform="rotate(0)"/>
+      
+        <ellipse cx="0" cy="-11.52" rx="6.912" ry="13.824" 
+                 fill="#FFB6D4" transform="rotate(90)"/>
+      
+        <ellipse cx="0" cy="-11.52" rx="6.912" ry="13.824" 
+                 fill="#FFB6D4" transform="rotate(180)"/>
+      
+        <ellipse cx="0" cy="-11.52" rx="6.912" ry="13.824" 
+                 fill="#FFB6D4" transform="rotate(270)"/>
+      
+      <circle cx="0" cy="0" r="5.183999999999999" fill="#FFE066"/>
+    </g>
+  
+    <g transform="translate(50.4, 108)" filter="url(#shadow)">
+      
+        <ellipse cx="0" cy="-11.52" rx="6.912" ry="13.824" 
+                 fill="#FF85C0" transform="rotate(0)"/>
+      
+        <ellipse cx="0" cy="-11.52" rx="6.912" ry="13.824" 
+                 fill="#FF85C0" transform="rotate(90)"/>
+      
+        <ellipse cx="0" cy="-11.52" rx="6.912" ry="13.824" 
+                 fill="#FF85C0" transform="rotate(180)"/>
+      
+        <ellipse cx="0" cy="-11.52" rx="6.912" ry="13.824" 
+                 fill="#FF85C0" transform="rotate(270)"/>
+      
+      <circle cx="0" cy="0" r="5.183999999999999" fill="#FFE066"/>
+    </g>
+  
+    <g transform="translate(93.60000000000001, 108)" filter="url(#shadow)">
+      
+        <ellipse cx="0" cy="-11.52" rx="6.912" ry="13.824" 
+                 fill="#FF85C0" transform="rotate(0)"/>
+      
+        <ellipse cx="0" cy="-11.52" rx="6.912" ry="13.824" 
+                 fill="#FF85C0" transform="rotate(90)"/>
+      
+        <ellipse cx="0" cy="-11.52" rx="6.912" ry="13.824" 
+                 fill="#FF85C0" transform="rotate(180)"/>
+      
+        <ellipse cx="0" cy="-11.52" rx="6.912" ry="13.824" 
+                 fill="#FF85C0" transform="rotate(270)"/>
+      
+      <circle cx="0" cy="0" r="5.183999999999999" fill="#FFE066"/>
+    </g>
+  
+  
+  <!-- Decoración adicional - pétalos flotantes -->
+  <g opacity="0.3">
+    <ellipse cx="21.599999999999998" cy="21.599999999999998" rx="5.76" ry="11.52" 
+             fill="#FFE4F0" transform="rotate(45 21.599999999999998 21.599999999999998)"/>
+    <ellipse cx="122.39999999999999" cy="122.39999999999999" rx="5.76" ry="11.52" 
+             fill="#FFE4F0" transform="rotate(-45 122.39999999999999 122.39999999999999)"/>
+  </g>
+  
+  <!-- Borde decorativo -->
+  <rect x="2" y="2" width="140" height="140" 
+        fill="none" stroke="rgba(255, 255, 255, 0.4)" stroke-width="3" rx="14.4"/>
+</svg>
