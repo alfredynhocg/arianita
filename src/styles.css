@@ -1,5 +1,6 @@
 /* Estilos globales */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+@import 'aos/dist/aos.css';
 
 body {
   margin: 0;

@@ -52,7 +52,7 @@
   </div>
 
   <div class="invitation-content" *ngIf="sobreAbierto" [@slideIn]>
-  <div class="header">
+  <div class="header" data-aos="fade-down">
     <div class="decorative-element top"></div>
     <div class="capybara-decorations">
       <img src="assets/capibaras/capybara-flower.png" alt="Capibara" class="capybara-left" *ngIf="false">
@@ -64,25 +64,25 @@
   </div>
 
   <div class="main-content">
-    <div class="intro-text animate-slide-up">
+    <div class="intro-text animate-slide-up" data-aos="fade-up">
       <p class="dear">Querido/a amigo/a:</p>
       <p class="invitation-text">
         Con mucho cariño te invitamos al bautizo de
       </p>
     </div>
 
-    <div class="name-highlight animate-zoom-in">
+    <div class="name-highlight animate-zoom-in" data-aos="zoom-in" data-aos-delay="200">
       <div class="name-decoration">🦦</div>
       <h2 class="child-name">{{ nombreNina }}</h2>
       <div class="name-decoration">🦦</div>
     </div>
-    <div class="capybara-message">
+    <div class="capybara-message" data-aos="fade-up" data-aos-delay="300">
       <div class="cute-capybara capybara-rainbow">🌈</div>
       <p>🌿 ¡Un día especial para celebrar su bautizo! 🌿</p>
       <div class="cute-capybara capybara-gift">🎁</div>
     </div>
 
-    <div class="slider-container animate-fade-in">
+    <div class="slider-container animate-fade-in" data-aos="flip-left" data-aos-duration="1500">
       <div class="slider-wrapper">
         <div class="slider-images" [style.transform]="'translateX(-' + (indiceActual * 100) + '%)'">
           <div class="slide" *ngFor="let imagen of imagenes; let i = index" 
@@ -111,13 +111,13 @@
       </div>
     </div>
 
-    <div class="event-date animate-slide-up">
+    <div class="event-date animate-slide-up" data-aos="fade-up">
       <p class="date-text">Que se celebrará este</p>
       <p class="date-highlight">{{ fechaBautizo }}</p>
     </div>
 
     <div class="details-section animate-fade-in">
-      <div class="detail-card">
+      <div class="detail-card" data-aos="fade-right" data-aos-delay="100">
         <div class="capybara-card-icon">🦦🎀</div>
         <div class="icon">⛪</div>
         <h3>Ceremonia Religiosa</h3>
@@ -125,7 +125,7 @@
         <p>Iglesia de Ayo Ayo</p>
       </div>
 
-      <div class="detail-card">
+      <div class="detail-card" data-aos="fade-left" data-aos-delay="200">
         <div class="capybara-card-icon">🦦👑</div>
         <div class="icon">🎉</div>
         <h3>Celebración</h3>
@@ -135,12 +135,12 @@
       </div>
     </div>
 
-    <div class="mother-section animate-slide-up">
+    <div class="mother-section animate-slide-up" data-aos="fade-up" data-aos-delay="100">
       <p class="with-love">Con mucho cariño,</p>
       <p class="mother-name">{{ nombreMadre }}</p>
     </div>
 
-    <div class="confirmation-section">
+    <div class="confirmation-section" data-aos="zoom-in" data-aos-delay="200">
       <div class="capybara-invite">
         <div class="capybara-friend capybara-friend-1">🦦💌</div>
         <button class="confirm-btn" (click)="toggleFormulario()" *ngIf="!confirmado && !cargando">
@@ -149,12 +149,12 @@
         <div class="capybara-friend capybara-friend-2">🦦🎈</div>
       </div>
 
-      <div class="loading-spinner" *ngIf="cargando">
+      <div class="loading-spinner" *ngIf="cargando" data-aos="fade" data-aos-duration="400">
         <div class="spinner"></div>
         <p>Procesando...</p>
       </div>
 
-      <div class="form-container" *ngIf="mostrarFormulario && !confirmado && !cargando">
+      <div class="form-container" *ngIf="mostrarFormulario && !confirmado && !cargando" data-aos="fade-up" data-aos-duration="600">
         <input 
           type="text" 
           [(ngModel)]="nombreInvitado" 
@@ -168,20 +168,20 @@
         <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
       </div>
 
-      <div class="confirmed-message" *ngIf="confirmado">
+      <div class="confirmed-message" *ngIf="confirmado" data-aos="zoom-in" data-aos-duration="800">
         <p>✅ ¡Confirmación recibida!</p>
         <p>¡Te esperamos! 💖</p>
         <p class="total-confirmados">Total confirmados: {{ totalInvitados }}</p>
       </div>
     </div>
 
-    <div class="admin-section">
+    <div class="admin-section" data-aos="fade-up" data-aos-delay="300">
       <button class="admin-toggle-btn" (click)="toggleListaInvitados()">
         {{ autenticado ? '🔒 Panel Admin' : '👀 Ver Lista' }} 
         <span *ngIf="totalInvitados > 0">({{ totalInvitados }})</span>
       </button>
 
-      <div class="admin-login" *ngIf="mostrarLoginAdmin && !autenticado && !cargando">
+      <div class="admin-login" *ngIf="mostrarLoginAdmin && !autenticado && !cargando" data-aos="flip-down" data-aos-duration="700">
         <h3>🔐 Acceso Administrador</h3>
         <input 
           type="password" 
@@ -196,7 +196,7 @@
         <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
       </div>
 
-      <div class="guests-list" *ngIf="mostrarListaInvitados && autenticado">
+      <div class="guests-list" *ngIf="mostrarListaInvitados && autenticado" data-aos="slide-up" data-aos-duration="800">
         <div class="admin-header">
           <h3>📋 Invitados Confirmados</h3>
           <button class="logout-btn" (click)="cerrarSesionAdmin()">
@@ -236,7 +236,7 @@
     </div>
   </div>
 
-  <div class="footer">
+  <div class="footer" data-aos="fade-up" data-aos-delay="400">
     <div class="decorative-element bottom"></div>
     <div class="hearts-bottom">🦦 🌿 💕 🌿 🦦</div>
   </div>

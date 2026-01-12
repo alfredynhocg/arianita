@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { InvitadosService, Invitado } from './invitados.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import AOS from 'aos';
 
 @Component({
   selector: 'app-root',
@@ -59,10 +60,23 @@ export class AppComponent implements AfterViewInit {
     this.cargarContador();
     this.iniciarSlider();
   }
+
+  ngOnInit() {
+    AOS.init({
+      duration: 1000,
+      once: false,
+      offset: 100,
+      easing: 'ease-in-out'
+    });
+  }
   
   abrirSobre() {
     this.sobreAbierto = true;
     this.intentarReproducirMusica();
+    // Refrescar AOS después de mostrar el contenido
+    setTimeout(() => {
+      AOS.refresh();
+    }, 100);
   }
 
   cargarContador() {
