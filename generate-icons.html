@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Generar Iconos PWA</title>
+</head>
+<body>
+    <h2>Generador de Iconos - Bautizo Arianita</h2>
+    <p>Haz clic derecho en cada imagen y selecciona "Guardar imagen como..." con el nombre correspondiente</p>
+    
+    <div id="icons"></div>
+
+    <script>
+        const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+        
+        function generateIcon(size) {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            // Fondo degradado rosa
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#FFE4F0');
+            gradient.addColorStop(0.5, '#FFC0CB');
+            gradient.addColorStop(1, '#FFB6D4');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+            
+            // Función para dibujar una flor
+            function drawFlower(x, y, radius, color) {
+                const petals = 5;
+                ctx.fillStyle = color;
+                
+                // Pétalos
+                for (let i = 0; i < petals; i++) {
+                    ctx.save();
+                    ctx.translate(x, y);
+                    ctx.rotate((Math.PI * 2 * i) / petals);
+                    ctx.beginPath();
+                    ctx.ellipse(0, -radius * 0.6, radius * 0.4, radius * 0.8, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+                
+                // Centro
+                ctx.fillStyle = '#FFE066';
+                ctx.beginPath();
+                ctx.arc(x, y, radius * 0.3, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            // Dibujar múltiples flores
+            const centerX = size / 2;
+            const centerY = size / 2;
+            const mainRadius = size * 0.25;
+            
+            // Flor central grande
+            drawFlower(centerX, centerY, mainRadius, '#FF69B4');
+            
+            // Flores pequeñas alrededor
+            const smallRadius = size * 0.12;
+            drawFlower(centerX - mainRadius * 1.2, centerY - mainRadius * 0.8, smallRadius, '#FFB6D4');
+            drawFlower(centerX + mainRadius * 1.2, centerY - mainRadius * 0.8, smallRadius, '#FFB6D4');
+            drawFlower(centerX - mainRadius * 0.5, centerY + mainRadius * 1.3, smallRadius, '#FF85C0');
+            drawFlower(centerX + mainRadius * 0.5, centerY + mainRadius * 1.3, smallRadius, '#FF85C0');
+            
+            // Borde suave
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+            ctx.lineWidth = size * 0.02;
+            ctx.strokeRect(ctx.lineWidth / 2, ctx.lineWidth / 2, size - ctx.lineWidth, size - ctx.lineWidth);
+            
+            return canvas;
+        }
+        
+        const iconsDiv = document.getElementById('icons');
+        
+        sizes.forEach(size => {
+            const container = document.createElement('div');
+            container.style.margin = '20px';
+            
+            const title = document.createElement('h3');
+            title.textContent = `icon-${size}x${size}.png`;
+            
+            const canvas = generateIcon(size);
+            canvas.style.border = '2px solid #ccc';
+            canvas.style.margin = '10px';
+            
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = `icon-${size}x${size}.png`;
+            link.textContent = 'Descargar';
+            link.style.display = 'block';
+            link.style.marginTop = '10px';
+            link.style.padding = '10px';
+            link.style.background = '#FF69B4';
+            link.style.color = 'white';
+            link.style.textDecoration = 'none';
+            link.style.borderRadius = '5px';
+            link.style.textAlign = 'center';
+            link.style.width = '150px';
+            
+            container.appendChild(title);
+            container.appendChild(canvas);
+            container.appendChild(link);
+            iconsDiv.appendChild(container);
+        });
+    </script>
+</body>
+</html>

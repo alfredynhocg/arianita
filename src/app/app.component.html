@@ -8,7 +8,7 @@
   </button>
   
   <button class="install-btn" *ngIf="mostrarBotonInstalar" (click)="instalarApp(); $event.stopPropagation()" title="Instalar en tu dispositivo">
-    📱 Instalar App
+    📱 Instalar
   </button>
 
   <div class="envelope-container" *ngIf="!sobreAbierto">
@@ -23,70 +23,81 @@
       <div class="flor-fondo flor-8">🌺</div>
     </div>
     
-    <div class="envelope-scene">
-      
-      <div class="sobre-rosa" (click)="abrirSobre()">
-        
-        <div class="carta-invitacion">
-          <div class="flor-decorativa">🌸</div>
-          <h2 class="titulo-bautizo">Bautizo de</h2>
-          <h1 class="nombre-nina">Arianita</h1>
-          <div class="flores-pequeñas">✿ ❀ ✿</div>
-        </div>
-        
+    <div class="envelope-scene" style="position:relative;">
+      <div class="sobre-titular-centro" style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); text-align:center; z-index:3; width:80%; pointer-events:none;">
+        <div class="flor-decorativa" style="font-size:2.2rem;">🌸</div>
+        <h2 class="titulo-bautizo" style="margin:0; letter-spacing:2px; font-size:1.3rem; color:#d4508f; text-shadow:0 2px 8px #fff7;">Bautizo de</h2>
+        <h1 class="nombre-nina" style="margin:0; font-size:2.8rem; color:#e03a8a; font-family:'Playfair Display',serif; font-weight:700; text-shadow:0 2px 12px #fff8;">Arianita</h1>
+        <div class="flores-pequeñas" style="font-size:1.3rem; color:#d4508f; letter-spacing:10px;">✿ ❀ ✿</div>
+      </div>
+      <div class="sobre-rosa" (click)="efectoBrilloSobre(); abrirSobre()" style="position:relative;">
+
+<!-- EFECTO DE CORAZONES FLOTANDO -->
+<div class="corazones-flotando" *ngIf="mostrarDestello">
+  <span *ngFor="let corazon of corazonesAnimados"
+        class="corazon-animado"
+        [ngClass]="{
+          'corazon-brillante': corazon.brillante,
+          'corazon-gira': corazon.gira
+        }"
+        [style.left]="corazon.left"
+        [style.fontSize]="corazon.size + 'rem'"
+        [style.opacity]="corazon.opacity"
+        [style.color]="corazon.color"
+        [style.animationDelay]="corazon.delay"
+        [style.--desplazamiento-x]="corazon.dx + 'vw'"
+        >{{ corazon.icono }}</span>
+</div>
         <div class="sobre-contenedor">
           <div class="sobre-fondo"></div>
-          
           <div class="solapa-izquierda"></div>
-          
           <div class="solapa-derecha"></div>
-          
           <div class="sobre-frontal"></div>
-          
           <div class="solapa-triangulo"></div>
         </div>
-        
       </div>
-      
-      <button class="btn-abrir-bonito" (click)="abrirSobre()">
+      <button class="btn-abrir-bonito" (click)="efectoBrilloSobre(); abrirSobre()">
         🌸 Abrir Invitación 🌸
       </button>
-      
     </div>
   </div>
 
   <div class="invitation-content" *ngIf="sobreAbierto" [@slideIn]>
-  <div class="header" data-aos="fade-down">
-    <div class="decorative-element top"></div>
-    <div class="capybara-decorations">
-      <img src="assets/capibaras/capybara-flower.png" alt="Capibara" class="capybara-left" *ngIf="false">
-      <img src="assets/capibaras/capybara-crown.png" alt="Capibara" class="capybara-right" *ngIf="false">
+  <div class="header modern-header" data-aos="fade-down">
+    <div class="header-image-wrapper" style="position: relative; display: inline-block;">
+      <span class="header-flower-deco" aria-hidden="true">🌸</span>
     </div>
-    <div class="capybara-header">🦦🌿</div>
-    <h1 class="animate-fade-in">Invitación de Bautizo</h1>
-    <div class="hearts">🦦💖🌿</div>
+    <div class="header-content">
+      <h1 class="main-title">Invitación al Bautizo</h1>
+      <h2 class="main-names">{{ nombreNina }}</h2>
+      <div class="header-date-location">
+        <span class="header-date">{{ fechaBautizo }}</span>
+        <span class="header-location">La Paz, Bolivia</span>
+      </div>
+    </div>
+    <div class="decorative-element top"></div>
   </div>
 
   <div class="main-content">
-    <div class="intro-text animate-slide-up" data-aos="fade-up">
+    <div class="card-section intro-text animate-slide-up" data-aos="fade-up">
       <p class="dear">Querido/a amigo/a:</p>
       <p class="invitation-text">
         Con mucho cariño te invitamos al bautizo de
       </p>
     </div>
 
-    <div class="name-highlight animate-zoom-in" data-aos="zoom-in" data-aos-delay="200">
+    <div class="card-section name-highlight animate-zoom-in" data-aos="zoom-in" data-aos-delay="200">
       <div class="name-decoration">🦦</div>
       <h2 class="child-name">{{ nombreNina }}</h2>
       <div class="name-decoration">🦦</div>
     </div>
-    <div class="capybara-message" data-aos="fade-up" data-aos-delay="300">
+    <div class="card-section capybara-message" data-aos="fade-up" data-aos-delay="300">
       <div class="cute-capybara capybara-rainbow">🌈</div>
       <p>🌿 ¡Un día especial para celebrar su bautizo! 🌿</p>
       <div class="cute-capybara capybara-gift">🎁</div>
     </div>
 
-    <div class="slider-container animate-fade-in" data-aos="flip-left" data-aos-duration="1500">
+    <div class="card-section slider-container animate-fade-in" data-aos="flip-left" data-aos-duration="1500">
       <div class="slider-wrapper">
         <div class="slider-images" [style.transform]="'translateX(-' + (indiceActual * 100) + '%)'">
           <div class="slide" *ngFor="let imagen of imagenes; let i = index" 
@@ -103,6 +114,12 @@
         <button class="slider-btn next" (click)="siguiente()" aria-label="Siguiente">
           ❯
         </button>
+          <button class="slider-btn prev" (click)="anterior()" aria-label="Imagen anterior" role="button">
+            ❮
+          </button>
+          <button class="slider-btn next" (click)="siguiente()" aria-label="Imagen siguiente" role="button">
+            ❯
+          </button>
       </div>
       
       <div class="slider-dots">
@@ -115,7 +132,7 @@
       </div>
     </div>
 
-    <div class="event-date animate-slide-up" data-aos="fade-up">
+    <div class="card-section event-date animate-slide-up" data-aos="fade-up">
       <p class="date-text">Que se celebrará este</p>
       <p class="date-highlight">{{ fechaBautizo }}</p>
     </div>
@@ -139,12 +156,12 @@
       </div>
     </div>
 
-    <div class="mother-section animate-slide-up" data-aos="fade-up" data-aos-delay="100">
+    <div class="mother-section card-section animate-slide-up" data-aos="fade-up" data-aos-delay="100">
       <p class="with-love">Con mucho cariño,</p>
       <p class="mother-name">{{ nombreMadre }}</p>
     </div>
 
-    <div class="confirmation-section" data-aos="zoom-in" data-aos-delay="200">
+    <div class="confirmation-section card-section" data-aos="zoom-in" data-aos-delay="200">
       <div class="capybara-invite">
         <div class="capybara-friend capybara-friend-1">🦦💌</div>
         <button class="confirm-btn" (click)="toggleFormulario()" *ngIf="!confirmado && !cargando">
@@ -194,9 +211,21 @@
           class="input-field"
           (keyup.enter)="loginAdmin()"
         />
+          <input 
+            type="password" 
+            [(ngModel)]="passwordAdmin" 
+            placeholder="Contraseña de administrador"
+            class="input-field"
+            (keyup.enter)="loginAdmin()"
+            aria-label="Contraseña de administrador"
+            required
+          />
         <button class="submit-btn" (click)="loginAdmin()">
           Entrar
         </button>
+          <button class="submit-btn" (click)="loginAdmin()" aria-label="Entrar como administrador" role="button">
+            Entrar
+          </button>
         <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
       </div>
 
@@ -218,6 +247,15 @@
           <button class="clear-btn" (click)="limpiarTodo()">
             🗑️ Limpiar Todo
           </button>
+            <button class="refresh-btn" (click)="recargarLista()" [disabled]="cargando" aria-label="Actualizar lista" role="button">
+              🔄 Actualizar
+            </button>
+            <button class="download-btn" (click)="descargarLista()" aria-label="Descargar lista" role="button">
+              📥 Descargar Lista
+            </button>
+            <button class="clear-btn" (click)="limpiarTodo()" aria-label="Limpiar lista" role="button">
+              🗑️ Limpiar Todo
+            </button>
         </div>
         
         <div class="guest-list-container">
@@ -230,6 +268,9 @@
             <button class="delete-btn" (click)="eliminarInvitado(invitado.id)">
               ❌
             </button>
+              <button class="delete-btn" (click)="eliminarInvitado(invitado.id)" aria-label="Eliminar invitado" role="button">
+                ❌
+              </button>
           </div>
           
           <div class="empty-message" *ngIf="invitadosConfirmados.length === 0">

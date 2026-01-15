@@ -1,3 +1,4 @@
+  // (Eliminado: la función debe estar solo dentro de la clase AppComponent)
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -60,6 +61,25 @@ export class AppComponent implements AfterViewInit {
   deferredPrompt: any;
   mostrarBotonInstalar = false;
 
+
+  mostrarBrilloSobre = false;
+  mostrarDestello = false;
+  corazonesAnimados = Array.from({ length: 22 }).map((_, i) => {
+    // Variedad de corazones
+    const left = `${Math.random() * 90 + 2}%`;
+    const delay = `${(Math.random() * 0.7).toFixed(2)}s`;
+    const size = (Math.random() * 2.2 + 2.2).toFixed(2); // 2.2rem a 4.4rem
+    const opacity = (Math.random() * 0.5 + 0.5).toFixed(2); // 0.5 a 1
+    const colores = ['#e03a8a', '#ff4b6e', '#ffb3d9', '#ff6f91', '#ff1744', '#ff8fa3'];
+    const color = colores[Math.floor(Math.random() * colores.length)];
+    const iconos = ['❤️', '💖', '💕', '💗', '💓', '💞'];
+    const icono = iconos[Math.floor(Math.random() * iconos.length)];
+    const brillante = Math.random() < 0.18; // 18% con brillo
+    const gira = Math.random() < 0.35; // 35% giran
+    const dx = (Math.random() * 16 - 8).toFixed(2); // desplazamiento lateral -8vw a +8vw
+    return { left, delay, size, opacity, color, icono, brillante, gira, dx };
+  });
+
   constructor(private invitadosService: InvitadosService) {
     this.cargarContador();
     this.iniciarSlider();
@@ -112,12 +132,15 @@ export class AppComponent implements AfterViewInit {
   }
   
   abrirSobre() {
-    this.sobreAbierto = true;
+    this.mostrarDestello = true;
     this.intentarReproducirMusica();
-    // Refrescar AOS después de mostrar el contenido
     setTimeout(() => {
-      AOS.refresh();
-    }, 100);
+      this.mostrarDestello = false;
+      this.sobreAbierto = true;
+      setTimeout(() => {
+        AOS.refresh();
+      }, 100);
+    }, 1200); // Duración del destello
   }
   
   instalarApp() {
@@ -358,5 +381,17 @@ export class AppComponent implements AfterViewInit {
       });
       this.musicPlaying = true;
     }
+  }
+
+  efectoBrilloSobre() {
+    this.mostrarBrilloSobre = true;
+    setTimeout(() => {
+      this.mostrarBrilloSobre = false;
+    }, 1400);
+  }
+
+  // Para *ngFor trackBy
+  trackByFlor(index: number, item: any): number {
+    return index;
   }
 }
